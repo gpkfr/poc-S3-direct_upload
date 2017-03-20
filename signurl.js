@@ -27,6 +27,6 @@ var bucketName = 'node-sdk-sample-fe015502-c40b-4582-870d-5c7a0d8fd873';
 var keyName = 'doge.jpg';
 
 var params = {Bucket: bucketName, Key: keyName};
-s3.getSignedUrl('putObject', params, function (err, url) {
+s3.getSignedUrl('getObject', params, function (err, url) {
     console.log(url);
 });
