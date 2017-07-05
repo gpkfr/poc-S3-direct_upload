@@ -22,11 +22,19 @@ var AWS = require('aws-sdk');
 // Create an S3 client
 var s3 = new AWS.S3();
 
-// Create a bucket and upload something into it
-var bucketName = 'node-sdk-sample-fe015502-c40b-4582-870d-5c7a0d8fd873';
-var keyName = 'doge.jpg';
+if (process.argv.length <= 2) {
+    console.log("Usage: " + __filename + " Key");
+    process.exit(-1);
+}
 
-var params = {Bucket: bucketName, Key: keyName};
+var param = process.argv[2];
+
+// Create a bucket and upload something into it
+var bucketName = 'gt-adminsys';
+var keyName = 'backup/rethinkdb/produs/' + param;
+
+var params = {Bucket: bucketName, Key: keyName, Expires: +86400};
+//var params = {Bucket: bucketName, Key: keyName};
 s3.getSignedUrl('getObject', params, function (err, url) {
     console.log(url);
 });
